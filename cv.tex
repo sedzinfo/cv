@@ -1,0 +1,173 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{fontawesome,tcolorbox,parskip,ragged2e,array,longtable,enumitem,setspace,blindtext,atbegshi,tabularx}
+\newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\setmainfont{Roboto}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\vspace*{-5em}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=-1pt,sharp corners,title=Dimitrios Zacharatos]
+\begin{tabularx}{\textwidth}{@{}X r@{}l@{}}
+Data Analyst specializing in statistical analysis for the social sciences and psychometrics, with proven expertise in data visualization, automated statistical reporting workflows and statistical modelling. Delivering dynamic, publication-ready outputs for both desktop and web platforms using R, Shiny, and \LaTeX &\begin{tabular}[t]{@{}c@{}l@{}}\faEnvelope\ & \href{mailto:3l7kfgbnd@mozmail.com}{email}\\
+\faPhone\ & \href{tel:00306955059260}{00306955059260}\\
+\faLinkedin\ & \href{https://www.linkedin.com/in/dimitrios-zacharatos/}{linkedin}\\
+\faGithub\ & \href{https://github.com/sedzinfo}{github}\\
+\faGlobe\ & \href{https://rpubs.com/sedzinfo}{rpubs}\\
+\faMapMarker\ & \href{Peristeri, Athens ,Greece}{Peristeri, Athens ,Greece}\\
+\end{tabular}
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!70!black,colback=gray!10!white,left=-1pt,sharp corners,title=Experience]
+\begin{itemize}[leftmargin=*,label={--},itemsep=0em]\item
+\textbf{2025-present}
+\textbf{ Evalion }
+Data Analyst 
+(Full Time)
+\newline\ Development and maintenance of online statistical systems of the company.  
+\item
+\textbf{2023-2025}
+\textbf{ Evalion }
+Data Analyst 
+(Part Time)
+\newline\ Architected an automated scoring and reporting system from the ground up.\\Took on an expert role in designing and implementing statistical methodologies.  
+\item
+\textbf{2023-2025}
+\textbf{ Psycholate }
+Data Analyst 
+(Part Time)
+\newline\ Data analysis and reporting.  
+\item
+\textbf{2015-2023}
+\textbf{ Psycholate }
+Data Analyst 
+(Full Time)
+\newline\ Delivered high-impact data analysis and reporting to stakeholders.\\Provided personalized statistical support to clients, ensuring reliability, validity, and generalizability of results.\\Led the creation of a Computer Adaptive Response system, acting as the key methodological consultant throughout.  
+\item
+\textbf{2010-2012}
+\textbf{ Quantos }
+Data input officer 
+(Full Time)
+\newline\ Ensured accuracy and consistency in portfolio valuation through data entry and verification  
+\item
+\textbf{2008-2009}
+\textbf{ Greek Army }
+Psychologist (rank private) 
+(Full Time)
+\newline\ Provided psychological services within the Greek Army, supporting personnel across multiple units.\\Appointed psychologist for the Special Forces training division, serving in a critical, high-stakes role during final deployment months  
+\item
+\textbf{2005-2008}
+\textbf{ UH / PM College / NH College }
+Research Assistant 
+(Part Time)
+\newline\ During this time I had several part time contracts with several institutions as part time and substitute staff. Duties and responsibilities included research assistance, marking, creating lecure notes, lab assistance etc.  
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=0pt,sharp corners,title=Education]
+\begin{itemize}[leftmargin=*,label={--},itemsep=0em]\item
+2009-2010
+\textbf{ ΔΟΑΤΑΠ - National University of Athens }
+BSc Psychology 
+\item
+2004-2005
+\textbf{ University of Hertfordshire }
+MSc Research Methods in Psychology 
+\item
+2001-2004
+\textbf{ University of Hertfordshire }
+BSc Cognitive Science 
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=0pt,sharp corners,title=Skills (point and click bellow to see examples)]
+\begin{itemize}[leftmargin=*,label={--},itemsep=0em]\item\textbf{ Statistical Modeling } 
+\newline\hspace{2em}\href{ https://rpubs.com/sedzinfo/glm_anova }{| General Linear Models (GLM)  }
+\href{ https://rpubs.com/sedzinfo/400840 }{| Generalized Linear Models (GLIM)  }
+\href{ https://rpubs.com/sedzinfo/cfa_mi }{| Structural Equation Modelling (SEM)  }
+\href{ https://rpubs.com/sedzinfo/glm_efa }{| Exploratory Factor Analysis (EFA)  }
+\href{ https://dimitrios.shinyapps.io/modelsirt/ }{| Item Response Theory (IRT)  }
+\href{ https://rpubs.com/sedzinfo/tirt }{| Thurstonian Item Response Theory (TIRT)  }
+\href{ https://rpubs.com/sedzinfo/functions_train_test }{| eXtreme Gradient Boosting (XGBOOST)  }
+\href{ https://rpubs.com/sedzinfo/nlp }{| Natural Language Processing (NLP)  }
+\href{ https://rpubs.com/sedzinfo/keras_mnist }{| Deep Neural Networks (NN)  }
+\href{ https://rpubs.com/sedzinfo/lda }{| Linear Discriminant Analysis (LDA)  }
+\href{ https://rpubs.com/sedzinfo/rpart }{| Decision Trees (CART)  }
+\item\textbf{ Data Visualization } 
+\newline\hspace{2em}\href{ https://github.com/sedzinfo/snp }{| Grammar of Graphics Plot version 2 (ggplot2)  }
+\href{ https://rpubs.com/sedzinfo/covid_deaths_infection }{| Interactive Data Visualization (plotly)  }
+\href{ https://dimitrios.shinyapps.io/worldbank/ }{| shiny (shiny)  }
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

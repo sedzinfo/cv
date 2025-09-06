@@ -1,0 +1,89 @@
+---
+output:
+  pdf_document:
+    latex_engine: lualatex
+    pandoc_args: "--pdf-engine-opt=-shell-escape"
+    keep_tex: true
+    toc: false
+    toc_depth: 1
+header-includes:
+- \usepackage{fontawesome,tcolorbox,parskip,ragged2e,array,longtable,enumitem,setspace,blindtext,atbegshi,tabularx}
+- \newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}
+- \usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+- \setmainfont{Roboto}
+---
+
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
+# directory<-paste0(dirname(rstudioapi::getActiveDocumentContext()$path),"/")
+directory<-paste0(getwd(), "/")
+df_work<-openxlsx::read.xlsx(paste0(directory,"cv.xlsx"),sheet="work")
+df_education<-openxlsx::read.xlsx(paste0(directory,"cv.xlsx"),sheet="education")
+df_examples<-openxlsx::read.xlsx(paste0(directory,"cv.xlsx"),sheet="examples")
+df_details<-openxlsx::read.xlsx(paste0(directory,"cv.xlsx"),sheet="details")
+df_description<-openxlsx::read.xlsx(paste0(directory,"cv.xlsx"),sheet="description")
+
+```
+\thispagestyle{empty}
+
+\vspace*{-5em}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=-1pt,sharp corners,title=Dimitrios Zacharatos]
+\begin{tabularx}{\textwidth}{@{}X r@{}l@{}}
+```{r details,results='asis',echo=FALSE}
+cat(df_description$description,"&")
+cat("\\begin{tabular}[t]{@{}c@{}l@{}}")
+for(i in 1:nrow(df_details)){
+  cat(paste0(df_details$icon[i],"\ & \\href{",df_details$link[i],"}{",df_details$label[i],"}\\\\\n"))
+}
+```
+\end{tabular}
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!70!black,colback=gray!10!white,left=-1pt,sharp corners,title=Experience]
+```{r work_experience,results='asis',echo=FALSE}
+cat("\\begin{itemize}[leftmargin=*,label={--},itemsep=0em]")
+for(i in 1:nrow(df_work)) {
+  cat(paste0("\\item\n"))
+  cat(paste0("\\textbf{",df_work[i,"date_start"],"-",df_work[i,"date_finish"],"}\n"))
+  cat(paste("\\textbf{",df_work[i,"company"],"}\n"))
+  cat(paste(df_work[i,"role"],"\n"))
+  cat(paste0("(",df_work[i,"status"],")\n"))
+  cat(paste("\\newline\\",df_work[i,"responsibilities"]," \n"))
+}
+cat("\\end{itemize}")
+```
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=0pt,sharp corners,title=Education]
+```{r education,results='asis',echo=FALSE}
+cat("\\begin{itemize}[leftmargin=*,label={--},itemsep=0em]")
+for(i in 1:nrow(df_education)) {
+  cat(paste0("\\item\n"))
+  cat(paste0(df_education[i,"date_start"],"-",df_education[i,"date_finish"],"\n"))
+  cat(paste("\\textbf{",df_education[i,"institution"],"}\n"))
+  cat(paste(df_education[i,"qualification"],"\n"))
+}
+cat("\\end{itemize}")
+``` 
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=gray!75!black,colback=gray!10!white,left=0pt,sharp corners,title=Skills (point and click bellow to see examples)]
+```{r skills,results='asis',echo=FALSE}
+cat("\\begin{itemize}[leftmargin=*,label={--},itemsep=0em]")
+for(i in unique(df_examples$Experience)) {
+  cat(paste("\\item"))
+  cat(paste("\\textbf{",i,"} \n\\newline\\hspace{2em}"))
+  for(z in df_examples[df_examples$Experience%in%i,"abbreviation"]){
+    cat("\\href{",df_examples[df_examples$abbreviation%in%z,"link"],"}{|",
+        paste0(df_examples[df_examples$abbreviation%in%z,"full_name"]," (",z,") "),
+        "}\n")
+  }
+}
+cat("\\end{itemize}")
+```
+\end{tcolorbox}
+
+
+
