@@ -20,7 +20,34 @@ This repository contains the source code and data for generating a professional 
 - [R](https://www.r-project.org/) (with packages: `rmarkdown`, `openxlsx`, `knitr`)
 - [Pandoc](https://pandoc.org/) (usually comes with RStudio)
 - [LaTeX](https://www.latex-project.org/) distribution (e.g., TeX Live, MikTeX)
-- Fonts: Roboto (or edit the font in `cv.Rmd`)
+ Fonts: Roboto (or edit the font in `cv.Rmd`)
+
+ ## Installation Instructions
+
+ ### Install R
+
+ #### On Linux (Debian/Ubuntu)
+ ```bash
+ sudo apt update
+ sudo apt install r-base
+ ```
+
+ For the latest version, see the [CRAN Linux instructions](https://cran.r-project.org/bin/linux/ubuntu/).
+
+ #### On Fedora
+ ```bash
+ sudo dnf install R
+ ```
+
+ #### On Arch Linux
+ ```bash
+ sudo pacman -S r
+ ```
+
+ #### On Windows
+ 1. Go to the [R for Windows download page](https://cran.r-project.org/bin/windows/base/).
+ 2. Download and run the installer (e.g., `R-4.x.x-win.exe`).
+ 3. Follow the installation prompts.
 
 ## How to Render
 
@@ -51,3 +78,16 @@ See `LICENSE` for details.
 ---
 
 *Generated September 2025*
+
+---
+
+![Stars](https://img.shields.io/github/stars/sedzinfo/cv)
+![Watchers](https://img.shields.io/github/watchers/sedzinfo/cv)
+![Repo Size](https://img.shields.io/github/repo-size/sedzinfo/cv)
+![Open Issues](https://img.shields.io/github/issues/sedzinfo/cv)
+![Forks](https://img.shields.io/github/forks/sedzinfo/cv)
+![Last Commit](https://img.shields.io/github/last-commit/sedzinfo/cv)
+![Contributors](https://img.shields.io/github/contributors/sedzinfo/cv)
+![License](https://img.shields.io/github/license/sedzinfo/cv)
+![Release](https://img.shields.io/github/v/release/sedzinfo/cv)
+![Workflow Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/cv/main.yml)
