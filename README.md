@@ -75,9 +75,8 @@ This will generate a PDF file from your R Markdown template and Excel data.
 ## License
 See `LICENSE` for details.
 
----
-
-*Generated September 2025*
+# Screenshots
+![Alt text](https://github.com/sedzinfo/cv/blob/main/screenshots/cv.png)
 
 ---
 
