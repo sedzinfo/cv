@@ -27,12 +27,35 @@ papersize: a4
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 # directory<-paste0(dirname(rstudioapi::getActiveDocumentContext()$path),"/")
 directory <- paste0(getwd(), "/")
-df_work        <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "work")
-df_education   <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "education")
-df_examples    <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "examples")
-df_details     <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "details")
-df_description <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "description")
-df_projects    <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "projects")
+df_work        <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "work")
+df_education   <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "education")
+df_examples    <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "examples")
+# the skills of this CV: column cv is empty (both CVs) or "v1"
+df_examples    <- df_examples[is.na(df_examples$cv) | df_examples$cv == "v1", ]
+df_details     <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "details")
+df_description <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "description")
+df_projects    <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "projects")
+# the full contact details (the address, email, ...) instead of the short labels
+df_details$label <- ifelse(is.na(df_details$label_full), df_details$label, df_details$label_full)
+# jobs at the same company one after the other become one entry (Evalion part
+# time, then full time): from the first start to the last finish, each period in
+# the status, and the longest description
+merge_jobs <- function(df) {
+  group <- cumsum(c(TRUE, df$company[-1] != df$company[-nrow(df)]))
+  merged <- lapply(split(df, group), function(g) {
+    if (nrow(g) == 1) return(g)
+    g <- g[order(as.numeric(g$date_start)), ]
+    period <- ifelse(g$date_finish == "present", paste("since", g$date_start),
+                     paste0(g$date_start, "–", g$date_finish))
+    out <- g[which.max(nchar(g$responsibilities)), ]
+    out$date_start <- g$date_start[1]
+    out$date_finish <- if (any(g$date_finish == "present")) "present" else as.character(max(as.numeric(g$date_finish)))
+    out$status <- paste(g$status, period, collapse = ", ")
+    out
+  })
+  do.call(rbind, merged)
+}
+df_work <- merge_jobs(df_work)
 ```
 
 \tcbset{

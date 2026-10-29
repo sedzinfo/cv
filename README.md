@@ -3,17 +3,20 @@
 This repository contains the source code and data for generating a professional CV (Curriculum Vitae) using R Markdown and LaTeX. The workflow is designed for reproducibility and easy updates, with data stored in an Excel file and rendering scripts for multiple platforms.
 
 ## Features
-- **Two versions**: `cv_v0` is the original CV; `cv_v1` is the newer one, with a Projects section and a lighter layout. Each has its own template and data file.
-- **Dynamic CV generation**: Main content and sections are read from the Excel file (`cv_v0.xlsx`, `cv_v1.xlsx`) and rendered via the matching R Markdown file (`cv_v0.Rmd`, `cv_v1.Rmd`).
+- **Two versions**: `cv_v0` is the original CV; `cv_v1` is the newer one, with a Projects section and a lighter layout. Each has its own template; both read the same data file, `cv.xlsx`.
+- **Dynamic CV generation**: Main content and sections are read from `cv.xlsx` and rendered via `cv_v0.Rmd` and `cv_v1.Rmd`.
 - **PDF output**: Produces a high-quality PDF using LaTeX and the `lualatex` engine.
 - **Cross-platform rendering**: Includes scripts for Linux (`render_cv.sh`), Windows (`render_cv.bat`), and PowerShell (`render_cv.ps1`).
 - **Customizable**: Easily update your CV by editing the Excel file or R Markdown template.
 
 ## File Overview
-- `cv_v0.Rmd` — R Markdown template of the original CV. Reads data from `cv_v0.xlsx` and renders to `cv_v0.pdf`.
-- `cv_v0.xlsx` — Excel file with the work experience, education, skills, and personal details of the original CV.
-- `cv_v1.Rmd` — R Markdown template of the new CV (Projects section, contact details in full, lighter section boxes). Reads data from `cv_v1.xlsx` and renders to `cv_v1.pdf`.
-- `cv_v1.xlsx` — Excel file of the new CV; it has an extra `projects` sheet (`name`, `description`, `link`).
+- `cv.xlsx` — Excel file with the work experience, education, skills, projects, and personal details, used by both CVs. A change here shows in both.
+  - `details`: `label` is the short text of `cv_v0` ("email"), `label_full` the full one of `cv_v1` (the address itself).
+  - `examples` (skills): column `cv` is empty for skills in both CVs, `v0` or `v1` for skills in one only.
+  - `projects` (`name`, `description`, `link`): only `cv_v1` shows it.
+  - `work`: one row per position; `cv_v1` joins positions at the same company that follow each other (part time, then full time) into one entry.
+- `cv_v0.Rmd` — R Markdown template of the original CV; renders to `cv_v0.pdf`.
+- `cv_v1.Rmd` — R Markdown template of the new CV (Projects section, contact details in full, lighter section boxes); renders to `cv_v1.pdf`.
 - `cv_v0.tex`, `cv_v1.tex` — Generated LaTeX files (output from rendering, not meant for direct editing).
 - `render_cv.sh` — Bash script to render both CVs on Linux/macOS.
 - `render_cv.bat` — Batch script to render both CVs on Windows.
@@ -45,7 +48,7 @@ render_cv.bat
 This will generate a PDF file from your R Markdown template and Excel data.
 
 ## Customization
-- Edit `cv_v0.xlsx` or `cv_v1.xlsx` to update your work experience, education, skills, and personal details.
+- Edit `cv.xlsx` to update your work experience, education, skills, projects, and personal details (both CVs).
 - Edit `cv_v0.Rmd` or `cv_v1.Rmd` to change the template, formatting, or add/remove sections.
 
 ## License
