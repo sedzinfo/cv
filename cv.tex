@@ -66,6 +66,10 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -112,6 +116,7 @@
   \textcolor{accent}{\faEnvelope} & \href{mailto:dzacharatos@yahoo.com}{\small email}\\
   \textcolor{accent}{\faPhone} & \href{tel:00306947863817}{\small 6947863817}\\
   \textcolor{accent}{\faLinkedin} & \href{https://www.linkedin.com/in/dimitrios-zacharatos/}{\small linkedin}\\
+  \textcolor{accent}{\faHome} & \href{https://sedzinfo.github.io/}{\small github.io}\\
   \textcolor{accent}{\faGithub} & \href{https://github.com/sedzinfo}{\small github}\\
   \textcolor{accent}{\faGlobe} & \href{https://rpubs.com/sedzinfo}{\small rpubs}\\
   \textcolor{accent}{\faMapMarker} & \href{Peristeri, Athens ,Greece}{\small Peristeri, Athens ,Greece}\\
