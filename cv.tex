@@ -2,6 +2,7 @@
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \documentclass[
+  a4paper,
 ]{article}
 \usepackage{xcolor}
 \usepackage[left=15mm,right=15mm,top=5mm,bottom=0mm]{geometry}
@@ -109,7 +110,7 @@
 
 \thispagestyle{empty}
 
-\begin{tcolorbox}[sectionbox, title=Dimitrios Zacharatos]
+\begin{tcolorbox}[sectionbox, title={\LARGE Dimitrios Zacharatos}]
 \begin{tabularx}{\linewidth}{@{}X r@{}}
 \small Psychometrician and quantitative researcher with an MSc in Research Methods in Psychology. Expertise in applied statistical modeling, psychometric assessment development, and reproducible research workflows. Experienced in building production-grade assessment reporting systems and open-source statistical tools in R. &
 \begin{tabular}[t]{@{}c@{\,}l@{}}
@@ -118,8 +119,7 @@
   \textcolor{accent}{\faLinkedin} & \href{https://www.linkedin.com/in/dimitrios-zacharatos/}{\small linkedin}\\
   \textcolor{accent}{\faHome} & \href{https://sedzinfo.github.io/}{\small github.io}\\
   \textcolor{accent}{\faGithub} & \href{https://github.com/sedzinfo}{\small github}\\
-  \textcolor{accent}{\faGlobe} & \href{https://rpubs.com/sedzinfo}{\small rpubs}\\
-  \textcolor{accent}{\faMapMarker} & \href{Peristeri, Athens ,Greece}{\small Peristeri, Athens ,Greece}\\
+  \textcolor{accent}{\faMapMarker} & \small Peristeri, Athens ,Greece\\
 \end{tabular}
 \end{tabularx}
 \end{tcolorbox}
@@ -159,7 +159,7 @@
 \item\begin{tabularx}{\linewidth}{@{}p{2.6cm} X@{}}
   \textbf{\textcolor{accent}{2005--2008}} &
   \textbf{UH / PM College / NH College} \textbullet\ Research Assistant \textit{\small(Part Time)}\\
-  & \small During this time I had several part time contracts with several institutions as part time and substitute staff. Duties and responsibilities included research assistance, marking, creating lecure notes, lab assistance etc.
+  & \small During this time I had several part time contracts with several institutions as part time and substitute staff. Duties and responsibilities included research assistance, marking, creating lecture notes, lab assistance etc.
 \end{tabularx}
 \end{itemize}
 \end{tcolorbox}
@@ -184,29 +184,36 @@
 \end{itemize}
 \end{tcolorbox}
 
-\begin{tcolorbox}[sectionbox, title={Skills \normalfont\small(These are hyperlinks working in pdf)}]
+\begin{tcolorbox}[sectionbox, title=Skills]
 \textbf{\textcolor{accent}{Statistical Modeling}}\\[4pt]
 \raggedright
-\skillchip{\href{https://rpubs.com/sedzinfo/glm_anova}{General Linear Models (GLM)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/generalized_linear_models}{Generalized Linear Models (GLIM)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/cfa_mi}{Structural Equation Modelling (SEM)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/glm_efa}{Exploratory Factor Analysis (EFA)}} \hspace{2pt}
-\skillchip{\href{https://dimitrios.shinyapps.io/modelsirt/}{Item Response Theory (IRT)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/tirt}{Thurstonian Item Response Theory (TIRT)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/functions_train_test}{eXtreme Gradient Boosting (XGBOOST)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/nlp}{Natural Language Processing (NLP)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/keras_mnist}{Deep Neural Networks (NN)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/lda}{Linear Discriminant Analysis (LDA)}} \hspace{2pt}
-\skillchip{\href{https://rpubs.com/sedzinfo/rpart}{Decision Trees (CART)}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/glm_anova}{\textcolor{blue}{General Linear Models (GLM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/generalized_linear_models}{\textcolor{blue}{Generalized Linear Models (GLIM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/cfa_mi}{\textcolor{blue}{Structural Equation Modelling (SEM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/glm_efa}{\textcolor{blue}{Exploratory Factor Analysis (EFA)}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.github.io/vignettes/cat_irt_eap/}{\textcolor{blue}{Item Response Theory (IRT)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/tirt}{\textcolor{blue}{Thurstonian Item Response Theory (TIRT)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/functions_train_test}{\textcolor{blue}{eXtreme Gradient Boosting (XGBOOST)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/nlp}{\textcolor{blue}{Natural Language Processing (NLP)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/keras_mnist}{\textcolor{blue}{Deep Neural Networks (NN)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/lda}{\textcolor{blue}{Linear Discriminant Analysis (LDA)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/rpart}{\textcolor{blue}{Decision Trees (CART)}}} \hspace{2pt}
 
 \vspace{8pt}
 
 \textbf{\textcolor{accent}{Data Visualization}}\\[4pt]
 \raggedright
-\skillchip{\href{https://github.com/sedzinfo/snp}{Grammar of Graphics Plot version 2 (ggplot2)}} \hspace{2pt}
-\skillchip{\href{https://dimitrios.shinyapps.io/worldbank/}{Interactive Data Visualization (plotly)}} \hspace{2pt}
-\skillchip{\href{https://dimitrios.shinyapps.io/worldbank/}{shiny (shiny)}} \hspace{2pt}
-\skillchip{\href{https://sedzinfo.grafana.net/public-dashboards/425b920caf1b48dfb15fc829d322e949}{grafana (grafana)}} \hspace{2pt}
+\skillchip{\href{https://github.com/sedzinfo/snp}{\textcolor{blue}{Grammar of Graphics Plot version 2 (ggplot2)}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.shinyapps.io/golemworldbank/}{\textcolor{blue}{Interactive Data Visualization (plotly)}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo-golemcrypto.share.connect.posit.cloud/}{\textcolor{blue}{shiny}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textcolor{blue}{golem}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.grafana.net/public-dashboards/425b920caf1b48dfb15fc829d322e949}{\textcolor{blue}{grafana}}} \hspace{2pt}
+
+\vspace{8pt}
+
+\textbf{\textcolor{accent}{Documentation}}\\[4pt]
+\raggedright
+\skillchip{\href{https://sedzinfo.github.io/rwf/}{\textcolor{blue}{pkgdown}}} \hspace{2pt}
 
 \vspace{8pt}
 \end{tcolorbox}

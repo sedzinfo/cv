@@ -16,6 +16,7 @@ header-includes:
 - '\definecolor{lightbg}{RGB}{245,247,250}'
 - '\definecolor{chipbg}{RGB}{220,228,240}'
 geometry: "left=15mm,right=15mm,top=5mm,bottom=0mm"
+papersize: a4
 ---
 
 ```{r setup,include=FALSE}
@@ -59,15 +60,17 @@ df_description <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "des
 
 \thispagestyle{empty}
 
-\begin{tcolorbox}[sectionbox, title=Dimitrios Zacharatos]
+\begin{tcolorbox}[sectionbox, title={\LARGE Dimitrios Zacharatos}]
 \begin{tabularx}{\linewidth}{@{}X r@{}}
 ```{r details,results='asis',echo=FALSE}
 cat(paste0("\\small ", df_description$description[1], " &\n"))
 cat("\\begin{tabular}[t]{@{}c@{\\,}l@{}}\n")
 for (i in 1:nrow(df_details)) {
   icon <- sub("\\\\+$", "", df_details$icon[i])
-  cat(paste0("  \\textcolor{accent}{", icon, "} & \\href{",
-             df_details$link[i], "}{\\small ", df_details$label[i], "}\\\\\n"))
+  link <- df_details$link[i]
+  label <- paste0("\\small ", df_details$label[i])
+  if (grepl("^(https?://|mailto:|tel:)", link)) label <- paste0("\\href{", link, "}{", label, "}")
+  cat(paste0("  \\textcolor{accent}{", icon, "} & ", label, "\\\\\n"))
 }
 cat("\\end{tabular}\n")
 ```
@@ -106,15 +109,16 @@ cat("\\end{itemize}\n")
 ```
 \end{tcolorbox}
 
-\begin{tcolorbox}[sectionbox, title={Skills \normalfont\small(These are hyperlinks working in pdf)}]
+\begin{tcolorbox}[sectionbox, title=Skills]
 ```{r skills,results='asis',echo=FALSE}
 for (cat_name in unique(df_examples$Experience)) {
   cat(paste0("\\textbf{\\textcolor{accent}{", cat_name, "}}\\\\[4pt]\n"))
   cat("\\raggedright\n")
   rows <- df_examples[df_examples$Experience %in% cat_name, ]
   for (j in seq_len(nrow(rows))) {
-    cat(paste0("\\skillchip{\\href{", rows$link[j], "}{",
-               rows$full_name[j], " (", rows$abbreviation[j], ")}} \\hspace{2pt}\n"))
+    name <- rows$full_name[j]
+    if (tolower(name) != tolower(rows$abbreviation[j])) name <- paste0(name, " (", rows$abbreviation[j], ")")
+    cat(paste0("\\skillchip{\\href{", rows$link[j], "}{\\textcolor{blue}{", name, "}}} \\hspace{2pt}\n"))
   }
   cat("\n\\vspace{8pt}\n\n")
 }
