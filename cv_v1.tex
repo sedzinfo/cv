@@ -1,0 +1,226 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  a4paper,
+]{article}
+\usepackage{xcolor}
+\usepackage[left=15mm,right=15mm,top=9mm,bottom=8mm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{fontawesome,parskip,ragged2e,array,longtable,enumitem,setspace,atbegshi,tabularx}
+\usepackage[skins]{tcolorbox}
+\newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}
+\usepackage[colorlinks=true,urlcolor=linkblue]{hyperref}
+\setmainfont{Roboto}
+\definecolor{accent}{RGB}{31,56,100}
+\definecolor{lightbg}{RGB}{245,247,250}
+\definecolor{chipbg}{RGB}{232,238,247}
+\definecolor{linkblue}{RGB}{26,95,180}
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+\AtBeginDocument{\frenchspacing}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\tcbset{
+  sectionbox/.style={
+    enhanced,
+    colback=lightbg,
+    colframe=accent!35,
+    boxrule=0.5pt,
+    colbacktitle=accent!12,
+    coltitle=accent,
+    fonttitle=\bfseries,
+    titlerule=0pt,
+    arc=2pt,
+    outer arc=2pt,
+    top=5pt, bottom=5pt, left=8pt, right=8pt,
+    toptitle=3pt, bottomtitle=3pt,
+  },
+  namebox/.style={
+    sectionbox,
+    colframe=accent,
+    colbacktitle=accent,
+    coltitle=white,
+    toptitle=6pt, bottomtitle=6pt,
+  }
+}
+
+\newtcbox{\skillchip}{
+  nobeforeafter,
+  colframe=accent!25,
+  colback=chipbg,
+  boxrule=0.4pt,
+  arc=3pt,
+  boxsep=0pt,
+  left=1pt, right=1pt, top=2pt, bottom=2pt,
+  tcbox raise base,
+  fontupper=\small,
+}
+
+\thispagestyle{empty}
+
+\begin{tcolorbox}[namebox, title={\LARGE Dimitrios Zacharatos\hfill\normalsize\mdseries Psychometrician \textperiodcentered\ Quantitative Researcher}]
+\small Psychometrician and quantitative researcher with an MSc in Research Methods in Psychology. Expertise in applied statistical modeling, psychometric assessment development, and reproducible research workflows. Experienced in building production-grade assessment reporting systems and open-source statistical tools in R.
+
+\vspace{4pt}
+{\small\begin{tabularx}{\linewidth}{@{}XXX@{}}
+  \textcolor{accent}{\faEnvelope}\, \href{mailto:dzacharatos@yahoo.com}{dzacharatos@yahoo.com} & \textcolor{accent}{\faPhone}\, \href{tel:00306947863817}{+30 694 786 3817} & \textcolor{accent}{\faLinkedin}\, \href{https://www.linkedin.com/in/dimitrios-zacharatos/}{in/dimitrios-zacharatos}\\
+  \textcolor{accent}{\faHome}\, \href{https://sedzinfo.github.io/}{sedzinfo.github.io} & \textcolor{accent}{\faGithub}\, \href{https://github.com/sedzinfo}{github.com/sedzinfo} & \textcolor{accent}{\faMapMarker}\, Peristeri, Athens, Greece\\
+\end{tabularx}}
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Experience]
+\begin{itemize}[leftmargin=0pt, label={}, itemsep=0.5em, topsep=0pt]
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2023--present}} &
+  \textbf{Evalion} \textbullet\ Data Analyst \textit{\small(Part Time 2023–2025, Full Time since 2025)}\\
+  & \small Architected an automated scoring and reporting system from the ground up. Took on an expert role in designing and implementing statistical methodologies.
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2015--2025}} &
+  \textbf{Psycholate} \textbullet\ Data Analyst \textit{\small(Full Time 2015–2023, Part Time 2023–2025)}\\
+  & \small Delivered high-impact data analysis and reporting to stakeholders. Provided personalized statistical support to clients, ensuring reliability, validity, and generalizability of results. Led the creation of a Computer Adaptive Response system, acting as the key methodological consultant throughout.
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2010--2012}} &
+  \textbf{Quantos} \textbullet\ Data input officer \textit{\small(Full Time)}\\
+  & \small Ensured accuracy and consistency in portfolio valuation through data entry and verification
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2008--2009}} &
+  \textbf{Greek Army} \textbullet\ Psychologist (rank private) \textit{\small(Full Time)}\\
+  & \small Provided psychological services within the Greek Army, supporting personnel across multiple units. Appointed psychologist for the Special Forces training division, serving in a critical, high-stakes role during final deployment months
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2005--2008}} &
+  \textbf{UH / PM College / NH College} \textbullet\ Research Assistant \textit{\small(Part Time)}\\
+  & \small During this time I had several part time contracts with several institutions as part time and substitute staff. Duties and responsibilities included research assistance, marking, creating lecture notes, lab assistance etc.
+\end{tabularx}
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Projects]
+\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \href{https://sedzinfo.github.io/rwf/}{\textbf{\textcolor{linkblue}{rwf}}} & \small R package: statistical reporting and visualization for common methods\\[2pt]
+  \href{https://sedzinfo.shinyapps.io/golemworldbank/}{\textbf{\textcolor{linkblue}{golemworldbank}}} & \small Shiny app: World Bank indicators explorer\\[2pt]
+  \href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textbf{\textcolor{linkblue}{golemirt}}} & \small Shiny app: interactive Item Response Theory models and estimation\\[2pt]
+  \href{https://sedzinfo-golemcrypto.share.connect.posit.cloud/}{\textbf{\textcolor{linkblue}{golemcrypto}}} & \small Shiny app: cryptocurrency time series and market data explorer\\[2pt]
+  \href{https://sedzinfo.github.io/vignettes/illustration/}{\textbf{\textcolor{linkblue}{Data stories}}} & \small Quarto articles: Greece since 2000, the euro crisis, world fertility\\[2pt]
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Skills]
+\textbf{\textcolor{accent}{Statistical Modeling}}\\[4pt]
+\raggedright
+\skillchip{\href{https://rpubs.com/sedzinfo/glm_anova}{\textcolor{linkblue}{General Linear Models (GLM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/generalized_linear_models}{\textcolor{linkblue}{Generalized Linear Models (GLIM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/cfa_mi}{\textcolor{linkblue}{Structural Equation Modelling (SEM)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/glm_efa}{\textcolor{linkblue}{Exploratory Factor Analysis (EFA)}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.github.io/vignettes/cat_irt_eap/}{\textcolor{linkblue}{Item Response Theory (IRT)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/tirt}{\textcolor{linkblue}{Thurstonian Item Response Theory (TIRT)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/functions_train_test}{\textcolor{linkblue}{eXtreme Gradient Boosting (XGBOOST)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/nlp}{\textcolor{linkblue}{Natural Language Processing (NLP)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/keras_mnist}{\textcolor{linkblue}{Deep Neural Networks (NN)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/lda}{\textcolor{linkblue}{Linear Discriminant Analysis (LDA)}}} \hspace{2pt}
+\skillchip{\href{https://rpubs.com/sedzinfo/rpart}{\textcolor{linkblue}{Decision Trees (CART)}}} \hspace{2pt}
+
+\vspace{8pt}
+
+\textbf{\textcolor{accent}{Tools}}\\[4pt]
+\raggedright
+\skillchip{\href{https://github.com/sedzinfo}{\textcolor{linkblue}{R}}} \hspace{2pt}
+\skillchip{\href{https://github.com/sedzinfo/snp}{\textcolor{linkblue}{ggplot2}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.shinyapps.io/golemworldbank/}{\textcolor{linkblue}{plotly}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo-golemcrypto.share.connect.posit.cloud/}{\textcolor{linkblue}{Shiny}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textcolor{linkblue}{golem}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.github.io/rwf/}{\textcolor{linkblue}{pkgdown}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.github.io/vignettes/illustration/}{\textcolor{linkblue}{Quarto}}} \hspace{2pt}
+\skillchip{\href{https://github.com/sedzinfo}{\textcolor{linkblue}{Git}}} \hspace{2pt}
+\skillchip{\href{https://sedzinfo.grafana.net/public-dashboards/425b920caf1b48dfb15fc829d322e949}{\textcolor{linkblue}{Grafana}}} \hspace{2pt}
+
+\vspace{8pt}
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Education]
+\begin{itemize}[leftmargin=0pt, label={}, itemsep=0.5em, topsep=0pt]
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2009--2010}} &
+  \textbf{ΔΟΑΤΑΠ - National University of Athens}\\
+  & \small BSc Psychology
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2004--2005}} &
+  \textbf{University of Hertfordshire}\\
+  & \small MSc Research Methods in Psychology
+\end{tabularx}
+\item\begin{tabularx}{\linewidth}{@{}p{2.9cm} X@{}}
+  \textbf{\textcolor{accent}{2001--2004}} &
+  \textbf{University of Hertfordshire}\\
+  & \small BSc Cognitive Science
+\end{tabularx}
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

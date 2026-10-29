@@ -8,4 +8,6 @@ set -e
 cd "$(dirname "$0")"
 
 # Run Rscript with rmarkdown::render
-Rscript -e "rmarkdown::render('cv.Rmd', output_format='pdf_document')"
+# cv_v0: the original CV, cv_v1: the new one (with Projects)
+Rscript -e "rmarkdown::render('cv_v0.Rmd', output_format='pdf_document')"
+Rscript -e "rmarkdown::render('cv_v1.Rmd', output_format='pdf_document')"

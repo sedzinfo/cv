@@ -1,0 +1,153 @@
+---
+output:
+  pdf_document:
+    latex_engine: lualatex
+    pandoc_args: "--pdf-engine-opt=-shell-escape"
+    keep_tex: true
+    toc: false
+    toc_depth: 1
+header-includes:
+- '\usepackage{fontawesome,parskip,ragged2e,array,longtable,enumitem,setspace,atbegshi,tabularx}'
+- '\usepackage[skins]{tcolorbox}'
+- '\newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}'
+- '\usepackage[colorlinks=true,urlcolor=linkblue]{hyperref}'
+- '\setmainfont{Roboto}'
+- '\definecolor{accent}{RGB}{31,56,100}'
+- '\definecolor{lightbg}{RGB}{245,247,250}'
+- '\definecolor{chipbg}{RGB}{232,238,247}'
+- '\definecolor{linkblue}{RGB}{26,95,180}'
+# left-aligned text (no broken words, even gaps) and one space after a full stop
+- '\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}'
+- '\AtBeginDocument{\frenchspacing}'
+geometry: "left=15mm,right=15mm,top=9mm,bottom=8mm"
+papersize: a4
+---
+
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+# directory<-paste0(dirname(rstudioapi::getActiveDocumentContext()$path),"/")
+directory <- paste0(getwd(), "/")
+df_work        <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "work")
+df_education   <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "education")
+df_examples    <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "examples")
+df_details     <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "details")
+df_description <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "description")
+df_projects    <- openxlsx::read.xlsx(paste0(directory, "cv_v1.xlsx"), sheet = "projects")
+```
+
+\tcbset{
+  sectionbox/.style={
+    enhanced,
+    colback=lightbg,
+    colframe=accent!35,
+    boxrule=0.5pt,
+    colbacktitle=accent!12,
+    coltitle=accent,
+    fonttitle=\bfseries,
+    titlerule=0pt,
+    arc=2pt,
+    outer arc=2pt,
+    top=5pt, bottom=5pt, left=8pt, right=8pt,
+    toptitle=3pt, bottomtitle=3pt,
+  },
+  namebox/.style={
+    sectionbox,
+    colframe=accent,
+    colbacktitle=accent,
+    coltitle=white,
+    toptitle=6pt, bottomtitle=6pt,
+  }
+}
+
+\newtcbox{\skillchip}{
+  nobeforeafter,
+  colframe=accent!25,
+  colback=chipbg,
+  boxrule=0.4pt,
+  arc=3pt,
+  boxsep=0pt,
+  left=1pt, right=1pt, top=2pt, bottom=2pt,
+  tcbox raise base,
+  fontupper=\small,
+}
+
+\thispagestyle{empty}
+
+\begin{tcolorbox}[namebox, title={\LARGE Dimitrios Zacharatos\hfill\normalsize\mdseries Psychometrician \textperiodcentered\ Quantitative Researcher}]
+```{r details,results='asis',echo=FALSE}
+cat(paste0("\\small ", df_description$description[1], "\n\n\\vspace{4pt}\n"))
+contacts <- character()
+for (i in 1:nrow(df_details)) {
+  icon <- sub("\\\\+$", "", df_details$icon[i])
+  link <- df_details$link[i]
+  label <- df_details$label[i]
+  if (grepl("^(https?://|mailto:|tel:)", link)) label <- paste0("\\href{", link, "}{", label, "}")
+  contacts <- c(contacts, paste0("\\textcolor{accent}{", icon, "}\\, ", label))
+}
+# three per row
+cat("{\\small\\begin{tabularx}{\\linewidth}{@{}XXX@{}}\n")
+rows <- split(contacts, ceiling(seq_along(contacts) / 3))
+for (r in rows) cat(paste0("  ", paste(c(r, rep("", 3 - length(r))), collapse = " & "), "\\\\\n"))
+cat("\\end{tabularx}}\n")
+```
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Experience]
+```{r work_experience,results='asis',echo=FALSE}
+cat("\\begin{itemize}[leftmargin=0pt, label={}, itemsep=0.5em, topsep=0pt]\n")
+for (i in 1:nrow(df_work)) {
+  resp <- gsub("\\\\", " ", df_work[i, "responsibilities"], fixed = TRUE)
+  cat("\\item\\begin{tabularx}{\\linewidth}{@{}p{2.9cm} X@{}}\n")
+  cat(paste0("  \\textbf{\\textcolor{accent}{", df_work[i, "date_start"], "--",
+             df_work[i, "date_finish"], "}} &\n"))
+  cat(paste0("  \\textbf{", df_work[i, "company"], "} \\textbullet\\ ",
+             df_work[i, "role"], " \\textit{\\small(", df_work[i, "status"], ")}\\\\\n"))
+  cat(paste0("  & \\small ", resp, "\n"))
+  cat("\\end{tabularx}\n")
+}
+cat("\\end{itemize}\n")
+```
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[sectionbox, title=Projects]
+```{r projects,results='asis',echo=FALSE}
+cat("\\begin{tabularx}{\\linewidth}{@{}p{2.9cm} X@{}}\n")
+for (i in 1:nrow(df_projects)) {
+  cat(paste0("  \\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}} & \\small ",
+             df_projects$description[i], "\\\\[2pt]\n"))
+}
+cat("\\end{tabularx}\n")
+```
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Skills]
+```{r skills,results='asis',echo=FALSE}
+for (cat_name in unique(df_examples$Experience)) {
+  cat(paste0("\\textbf{\\textcolor{accent}{", cat_name, "}}\\\\[4pt]\n"))
+  cat("\\raggedright\n")
+  rows <- df_examples[df_examples$Experience %in% cat_name, ]
+  for (j in seq_len(nrow(rows))) {
+    name <- rows$full_name[j]
+    if (tolower(name) != tolower(rows$abbreviation[j])) name <- paste0(name, " (", rows$abbreviation[j], ")")
+    cat(paste0("\\skillchip{\\href{", rows$link[j], "}{\\textcolor{linkblue}{", name, "}}} \\hspace{2pt}\n"))
+  }
+  cat("\n\\vspace{8pt}\n\n")
+}
+```
+\end{tcolorbox}
+
+\begin{tcolorbox}[sectionbox, title=Education]
+```{r education,results='asis',echo=FALSE}
+cat("\\begin{itemize}[leftmargin=0pt, label={}, itemsep=0.5em, topsep=0pt]\n")
+for (i in 1:nrow(df_education)) {
+  cat("\\item\\begin{tabularx}{\\linewidth}{@{}p{2.9cm} X@{}}\n")
+  cat(paste0("  \\textbf{\\textcolor{accent}{", df_education[i, "date_start"], "--",
+             df_education[i, "date_finish"], "}} &\n"))
+  cat(paste0("  \\textbf{", df_education[i, "institution"], "}\\\\\n"))
+  cat(paste0("  & \\small ", df_education[i, "qualification"], "\n"))
+  cat("\\end{tabularx}\n")
+}
+cat("\\end{itemize}\n")
+```
+\end{tcolorbox}
