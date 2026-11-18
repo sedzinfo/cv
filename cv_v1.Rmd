@@ -12,6 +12,12 @@ header-includes:
 - '\newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}'
 - '\usepackage[colorlinks=true,urlcolor=linkblue]{hyperref}'
 - '\setmainfont{Roboto}'
+# bottom right of the last page: what rendered this CV. It sits in the bottom
+# 7mm of the paper and is left out when the text reaches that strip
+# (free space = what is left of the text area + the bottom margin)
+- '\usepackage{eso-pic}'
+- '\newcommand{\cvrendered}{\AtPageLowerLeft{\put(\LenToUnit{\paperwidth-15mm},\LenToUnit{4mm}){\makebox[0pt][r]{\scriptsize\color{black!45}Rendered with R Markdown and LuaLaTeX \textperiodcentered\ source: \href{https://github.com/sedzinfo/cv}{\textcolor{black!45}{github.com/sedzinfo/cv}}}}}}'
+- '\AtEndDocument{\par\penalty0\ifdim\dimexpr\pagegoal-\pagetotal-\pagedepth+\paperheight-1in-\voffset-\topmargin-\headheight-\headsep-\textheight\relax>7mm\AddToShipoutPictureFG*{\cvrendered}\fi}'
 - '\definecolor{accent}{RGB}{31,56,100}'
 - '\definecolor{lightbg}{RGB}{245,247,250}'
 - '\definecolor{chipbg}{RGB}{232,238,247}'

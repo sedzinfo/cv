@@ -61,6 +61,9 @@
 \newcolumntype{P}[1]{>{\justifying\arraybackslash}p{#1}}
 \usepackage[colorlinks=true,urlcolor=blue]{hyperref}
 \setmainfont{Roboto}
+\usepackage{eso-pic}
+\newcommand{\cvrendered}{\AtPageLowerLeft{\put(\LenToUnit{\paperwidth-15mm},\LenToUnit{4mm}){\makebox[0pt][r]{\scriptsize\color{black!45}Rendered with R Markdown and LuaLaTeX \textperiodcentered\ source: \href{https://github.com/sedzinfo/cv}{\textcolor{black!45}{github.com/sedzinfo/cv}}}}}}
+\AtEndDocument{\par\penalty0\ifdim\dimexpr\pagegoal-\pagetotal-\pagedepth+\paperheight-1in-\voffset-\topmargin-\headheight-\headsep-\textheight\relax>7mm\AddToShipoutPictureFG*{\cvrendered}\fi}
 \definecolor{accent}{RGB}{31,56,100}
 \definecolor{lightbg}{RGB}{245,247,250}
 \definecolor{chipbg}{RGB}{220,228,240}
