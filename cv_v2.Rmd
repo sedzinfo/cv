@@ -126,17 +126,21 @@ for (i in seq_len(nrow(df_work))) {
 
 \cvsection{Projects}
 ```{r projects,results='asis',echo=FALSE}
+# one table: type | name | description. The name column is as wide as the
+# longest name, so every description starts at the same tab stop
+cat("\\noindent\\begin{tabularx}{\\linewidth}{@{}>{\\small\\raggedright\\arraybackslash\\hyphenpenalty=10000\\leavevmode\\color{muted}}p{2.55cm}l@{\\hspace{16pt}}X@{}}\n")
 for (i in seq_len(nrow(df_projects))) {
-  # "Shiny app: World Bank indicators explorer" -> type on the left, the rest on the right
+  # "Shiny app: World Bank indicators explorer" -> type on the left, the rest in the description
   d <- df_projects$description[i]
   type <- ""
   if (grepl(": ", d, fixed = TRUE)) {
     type <- sub(":.*$", "", d)
     d <- sub("^[^:]*:\\s*", "", d)
   }
-  cat(tex_entry(type, paste0("\\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}", dot, "{\\small ", d, "}"),
-                gap = "2.5pt"))
+  cat(paste0(type, " & \\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}",
+             " & {\\small ", d, "}\\tabularnewline[2.5pt]\n"))
 }
+cat("\\end{tabularx}\\par\n")
 ```
 
 \cvsection[links open worked examples]{Skills}

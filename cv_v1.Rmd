@@ -153,7 +153,10 @@ for (cat_name in unique(df_examples$Experience)) {
   for (j in seq_len(nrow(rows))) {
     name <- rows$full_name[j]
     if (tolower(name) != tolower(rows$abbreviation[j])) name <- paste0(name, " (", rows$abbreviation[j], ")")
-    cat(paste0("\\skillchip{\\href{", rows$link[j], "}{\\textcolor{linkblue}{", name, "}}} \\hspace{2pt}\n"))
+    # a skill with an empty link cell is plain dark text, not a link to "NA"
+    if (!is.na(rows$link[j]) && nzchar(rows$link[j]))
+      name <- paste0("\\href{", rows$link[j], "}{\\textcolor{linkblue}{", name, "}}")
+    cat(paste0("\\skillchip{", name, "} \\hspace{2pt}\n"))
   }
   cat("\n\\vspace{8pt}\n\n")
 }
