@@ -50,11 +50,12 @@ jobs:
           printf 'Acquire::Retries "3";\nAcquire::http::Timeout "30";\nAcquire::https::Timeout "30";\n' | sudo tee /etc/apt/apt.conf.d/99-timeouts > /dev/null
           sudo apt-get update -q || echo "::warning::apt-get update failed"
 
-      # The Roboto of the local machine (fonts-roboto-unhinted of Ubuntu 24.04)
-      - name: Install the Roboto font
+      # The Roboto of the local machine (fonts-roboto-unhinted of Ubuntu 24.04),
+      # and pdftoppm (poppler-utils) for the screenshots
+      - name: Install the Roboto font and pdftoppm
         timeout-minutes: 5
         run: |
-          sudo apt-get install -y -q --no-install-recommends fonts-roboto-unhinted
+          sudo apt-get install -y -q --no-install-recommends fonts-roboto-unhinted poppler-utils
           fc-list | grep -q "Roboto" || { echo "::error::Roboto is not installed"; exit 1; }
 
       - uses: r-lib/actions/setup-pandoc@v2
@@ -81,11 +82,18 @@ jobs:
       - name: Render the CVs
         run: ./render_cv.sh
 
-      - name: Commit and push the PDFs
+      # The README shows these: one page image per CV, at 150 dpi
+      - name: Make the screenshots
+        run: |
+          for pdf in cv_v*.pdf; do
+            pdftoppm -png -r 150 -singlefile "$pdf" "screenshot/${pdf%.pdf}"
+          done
+
+      - name: Commit and push the PDFs and screenshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cv_v*.pdf cv_v*.tex
+          git add cv_v*.pdf cv_v*.tex screenshot/cv_v*.png
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0

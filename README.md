@@ -27,7 +27,7 @@ This repository contains the source code and data for generating a professional 
 - [R](https://www.r-project.org/) (with packages: `rmarkdown`, `openxlsx`, `knitr`)
 - [Pandoc](https://pandoc.org/) (usually comes with RStudio)
 - [LaTeX](https://www.latex-project.org/) distribution (e.g., TeX Live, MikTeX)
- Fonts: Roboto (or edit the font in `cv_v0.Rmd` / `cv_v1.Rmd`)
+- Fonts: Roboto (or edit the font in `cv_v0.Rmd` / `cv_v1.Rmd` / `cv_v2.Rmd`)
 
 ## How to Render
 
@@ -49,17 +49,21 @@ render_cv.bat
 This will generate a PDF file from your R Markdown template and Excel data.
 
 ### On GitHub (automatic)
-`.github/workflows/render-cv.yml` renders all CVs on every push to `main` that changes `cv.xlsx`, a `cv_v*.Rmd`, `render_cv.sh` or the workflow, and commits the PDFs (and their `.tex`) back to `main` as "Render CV PDFs [skip ci]". It can also be run from the Actions tab ("Run workflow"). After a push, `git pull` before the next commit: the workflow has added a commit on top of yours.
+`.github/workflows/render-cv.yml` renders all CVs on every push to `main` that changes `cv.xlsx`, a `cv_v*.Rmd`, `render_cv.sh` or the workflow, and commits the PDFs (and their `.tex`) and the screenshots in `screenshot/` back to `main` as "Render CV PDFs [skip ci]". It can also be run from the Actions tab ("Run workflow"). After a push, `git pull` before the next commit: the workflow has added a commit on top of yours.
 
 ## Customization
-- Edit `cv.xlsx` to update your work experience, education, skills, projects, and personal details (both CVs).
-- Edit `cv_v0.Rmd` or `cv_v1.Rmd` to change the template, formatting, or add/remove sections.
+- Edit `cv.xlsx` to update your work experience, education, skills, projects, and personal details (all CVs).
+- Edit `cv_v0.Rmd`, `cv_v1.Rmd` or `cv_v2.Rmd` to change the template, formatting, or add/remove sections.
 
 ## License
 See `LICENSE` for details.
 
 # Screenshots
-![Alt text](https://github.com/sedzinfo/cv/blob/main/screenshot/cv.png)
+Made from the PDFs (150 dpi) by the workflow each time it renders them.
+
+| `cv_v2` | `cv_v1` | `cv_v0` |
+|---|---|---|
+| ![cv_v2](screenshot/cv_v2.png) | ![cv_v1](screenshot/cv_v1.png) | ![cv_v0](screenshot/cv_v0.png) |
 
 ---
 
@@ -72,4 +76,4 @@ See `LICENSE` for details.
 ![Contributors](https://img.shields.io/github/contributors/sedzinfo/cv)
 ![License](https://img.shields.io/github/license/sedzinfo/cv)
 ![Release](https://img.shields.io/github/v/release/sedzinfo/cv)
-![Workflow Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/cv/main.yml)
+![Workflow Status](https://img.shields.io/github/actions/workflow/status/sedzinfo/cv/render-cv.yml)
