@@ -141,10 +141,15 @@ cat("\\end{itemize}\n")
 
 \begin{tcolorbox}[sectionbox, title=Projects]
 ```{r projects,results='asis',echo=FALSE}
-cat("\\begin{tabularx}{\\linewidth}{@{}p{2.9cm} X@{}}\n")
+# a long name wraps whole words ("Stock Market / Indices", not "In-dices")
+cat("\\begin{tabularx}{\\linewidth}{@{}>{\\raggedright\\arraybackslash\\hyphenpenalty=10000}p{2.9cm} X@{}}\n")
 for (i in 1:nrow(df_projects)) {
-  cat(paste0("  \\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}} & \\small ",
-             df_projects$description[i], "\\\\[2pt]\n"))
+  # a project with an empty link cell is plain bold text, not a link to "NA"
+  link <- df_projects$link[i]
+  name <- if (!is.na(link) && nzchar(link))
+    paste0("\\href{", link, "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}")
+  else paste0("\\textbf{", df_projects$name[i], "}")
+  cat(paste0("  ", name, " & \\small ", df_projects$description[i], "\\\\[2pt]\n"))
 }
 cat("\\end{tabularx}\n")
 ```

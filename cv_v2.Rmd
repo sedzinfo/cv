@@ -143,8 +143,12 @@ for (i in seq_len(nrow(df_projects))) {
     type <- sub(":.*$", "", d)
     d <- sub("^[^:]*:\\s*", "", d)
   }
-  cat(paste0(type, " & \\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}",
-             " & {\\small ", d, "}\\tabularnewline[2.5pt]\n"))
+  # a project with an empty link cell is plain bold text, not a link to "NA"
+  link <- df_projects$link[i]
+  name <- if (!is.na(link) && nzchar(link))
+    paste0("\\href{", link, "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}")
+  else paste0("\\textbf{", df_projects$name[i], "}")
+  cat(paste0(type, " & ", name, " & {\\small ", d, "}\\tabularnewline[2.5pt]\n"))
 }
 cat("\\end{tabularx}\\par\n")
 ```
