@@ -1,0 +1,217 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  a4paper,
+]{article}
+\usepackage{xcolor}
+\usepackage[left=15mm,right=15mm,top=0mm,bottom=8mm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{fontawesome,ragged2e,array,enumitem,tabularx}
+\usepackage[skins]{tcolorbox}
+\usepackage[colorlinks=true,urlcolor=linkblue]{hyperref}
+\setmainfont{Roboto}
+\definecolor{accent}{RGB}{31,56,100}
+\definecolor{muted}{RGB}{96,106,122}
+\definecolor{rulegrey}{RGB}{205,212,222}
+\definecolor{linkblue}{RGB}{26,95,180}
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+\AtBeginDocument{\frenchspacing}
+\setlength{\parindent}{0pt}
+\newcommand{\cvsection}[2][]{\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{#2}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{#1}\relax\else\hspace{8pt}{\small\color{muted}\itshape #1}\fi\par\vspace{4pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{tcolorbox}[enhanced, frame hidden, sharp corners, colback=accent, coltext=white, grow to left by=15mm, grow to right by=15mm, left=15mm, right=15mm, top=7mm, bottom=5mm, boxsep=0pt, before skip=0pt, after skip=9pt]
+{\fontsize{23}{27}\selectfont\bfseries Dimitrios Zacharatos}\par
+\vspace{3pt}
+{\large\color{white!72!accent}Psychometrician \textperiodcentered\ Quantitative Researcher}\par
+\vspace{9pt}
+{\small\hypersetup{urlcolor=white}\begin{tabularx}{\linewidth}{@{}XXX@{}}
+  \makebox[1.2em][l]{\color{white!62!accent}\faEnvelope}\href{mailto:dzacharatos@yahoo.com}{dzacharatos@yahoo.com} & \makebox[1.2em][l]{\color{white!62!accent}\faPhone}\href{tel:00306947863817}{+30 694 786 3817} & \makebox[1.2em][l]{\color{white!62!accent}\faLinkedin}\href{https://www.linkedin.com/in/dimitrios-zacharatos/}{in/sedzinfo}\\[2pt]
+  \makebox[1.2em][l]{\color{white!62!accent}\faHome}\href{https://sedzinfo.github.io/}{sedzinfo.github.io} & \makebox[1.2em][l]{\color{white!62!accent}\faGithub}\href{https://github.com/sedzinfo}{github.com/sedzinfo} & \makebox[1.2em][l]{\color{white!62!accent}\faMapMarker}Peristeri, Athens, Greece\\[2pt]
+\end{tabularx}}
+\end{tcolorbox}
+
+Quantitative researcher with an MSc in Research Methods in Psychology
+and 15 years of experience in statistics and data analysis. I build
+statistical models, automated reporting systems and interactive data
+applications, and publish open-source R tools.
+
+\setlength{\parskip}{0pt}
+
+\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{Experience}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{}\relax\else\hspace{8pt}{\small\color{muted}\itshape }\fi\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2023--present & \textbf{Evalion}\enspace{\color{muted}\textperiodcentered}\enspace Data Analyst\hspace{0pt plus 1filll}\hspace{6pt}{\small\color{muted}\itshape Part Time 2023–2025, Full Time since 2025}\tabularnewline
+& {\small \hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Architected an automated scoring and reporting system from the ground up.\par
+\hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Took on an expert role in designing and implementing statistical methodologies.\par}\tabularnewline
+\end{tabularx}\par\vspace{7pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2015--2025 & \textbf{Psycholate}\enspace{\color{muted}\textperiodcentered}\enspace Data Analyst\hspace{0pt plus 1filll}\hspace{6pt}{\small\color{muted}\itshape Full Time 2015–2023, Part Time 2023–2025}\tabularnewline
+& {\small \hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Delivered high-impact data analysis and reporting to stakeholders.\par
+\hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Provided personalized statistical support to clients, ensuring reliability, validity, and generalizability of results.\par
+\hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Led the creation of a Computer Adaptive Response system, acting as the key methodological consultant throughout.\par}\tabularnewline
+\end{tabularx}\par\vspace{7pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2010--2012 & \textbf{Quantos}\enspace{\color{muted}\textperiodcentered}\enspace Data input officer\hspace{0pt plus 1filll}\hspace{6pt}{\small\color{muted}\itshape Full Time}\tabularnewline
+& {\small \hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Ensured accuracy and consistency in portfolio valuation through data entry and verification\par}\tabularnewline
+\end{tabularx}\par\vspace{7pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2008--2009 & \textbf{Greek Army}\enspace{\color{muted}\textperiodcentered}\enspace Psychologist (rank private)\hspace{0pt plus 1filll}\hspace{6pt}{\small\color{muted}\itshape Full Time}\tabularnewline
+& {\small \hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Provided psychological services within the Greek Army, supporting personnel across multiple units.\par
+\hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}Appointed psychologist for the Special Forces training division, serving in a critical, high-stakes role during final deployment months\par}\tabularnewline
+\end{tabularx}\par\vspace{7pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2005--2008 & \textbf{UH / PM College / NH College}\enspace{\color{muted}\textperiodcentered}\enspace Research Assistant\hspace{0pt plus 1filll}\hspace{6pt}{\small\color{muted}\itshape Part Time}\tabularnewline
+& {\small \hangindent=1em\hangafter=1\makebox[1em][l]{\textcolor{accent!55}{\textbullet}}During this time I had several part time contracts with several institutions as part time and substitute staff. Duties and responsibilities included research assistance, marking, creating lecture notes, lab assistance etc.\par}\tabularnewline
+\end{tabularx}\par\vspace{7pt}
+
+\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{Projects}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{}\relax\else\hspace{8pt}{\small\color{muted}\itshape }\fi\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+R package & \href{https://sedzinfo.github.io/rwf/}{\textbf{\textcolor{linkblue}{rwf}}}\enspace{\color{muted}\textperiodcentered}\enspace {\small statistical reporting and visualization for common methods}\tabularnewline
+\end{tabularx}\par\vspace{2.5pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Shiny app & \href{https://sedzinfo.shinyapps.io/golemworldbank/}{\textbf{\textcolor{linkblue}{Worldbank WDI}}}\enspace{\color{muted}\textperiodcentered}\enspace {\small World Bank indicators explorer}\tabularnewline
+\end{tabularx}\par\vspace{2.5pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Shiny app & \href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textbf{\textcolor{linkblue}{IRT Functions}}}\enspace{\color{muted}\textperiodcentered}\enspace {\small interactive Item Response Theory models and estimation}\tabularnewline
+\end{tabularx}\par\vspace{2.5pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Shiny app & \href{https://sedzinfo-golemstockindices.share.connect.posit.cloud/}{\textbf{\textcolor{linkblue}{Stock Market Indices}}}\enspace{\color{muted}\textperiodcentered}\enspace {\small stock market indices data explorer}\tabularnewline
+\end{tabularx}\par\vspace{2.5pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Quarto articles & \href{https://sedzinfo.github.io/vignettes/illustration/}{\textbf{\textcolor{linkblue}{Data stories}}}\enspace{\color{muted}\textperiodcentered}\enspace {\small Greece since 2000, the euro crisis, world fertility}\tabularnewline
+\end{tabularx}\par\vspace{2.5pt}
+
+\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{Skills}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{links open worked examples}\relax\else\hspace{8pt}{\small\color{muted}\itshape links open worked examples}\fi\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Statistical Modeling & {\small \mbox{\href{https://sedzinfo.github.io/rwf/articles/GLM_COMPUTE_AOV_ES.html}{\textcolor{linkblue}{General Linear Models (GLM)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/rwf/articles/GLM_LOGISTIC_REGRESSION.html}{\textcolor{linkblue}{Generalized Linear Models (GLIM)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/cfa_mi}{\textcolor{linkblue}{Structural Equation Modelling (SEM)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/rwf/articles/GLM_EFA.html}{\textcolor{linkblue}{Exploratory Factor Analysis (EFA)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/vignettes/cat_irt_eap/}{\textcolor{linkblue}{Item Response Theory (IRT)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/rwf/articles/GLM_IRT_T.html}{\textcolor{linkblue}{Thurstonian Item Response Theory (TIRT)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/functions_train_test}{\textcolor{linkblue}{eXtreme Gradient Boosting (XGBOOST)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/nlp}{\textcolor{linkblue}{Natural Language Processing (NLP)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/keras_mnist}{\textcolor{linkblue}{Deep Neural Networks (NN)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/lda}{\textcolor{linkblue}{Linear Discriminant Analysis (LDA)}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://rpubs.com/sedzinfo/rpart}{\textcolor{linkblue}{Decision Trees (CART)}}}}\tabularnewline
+\end{tabularx}\par\vspace{3pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+Tools & {\small \mbox{\href{https://github.com/sedzinfo}{\textcolor{linkblue}{R}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/vignettes/validation/}{\textcolor{linkblue}{lavaan}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textcolor{linkblue}{mirt}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/vignettes/cat_irt_eap/}{\textcolor{linkblue}{catR}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/vignettes/example/EXAMPLE_TIRT.html}{\textcolor{linkblue}{thurstonianIRT}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://github.com/sedzinfo/snp}{\textcolor{linkblue}{ggplot2}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.shinyapps.io/golemworldbank/}{\textcolor{linkblue}{plotly}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo-golemcrypto.share.connect.posit.cloud/}{\textcolor{linkblue}{Shiny}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo-golemirt.share.connect.posit.cloud/}{\textcolor{linkblue}{golem}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/rwf/}{\textcolor{linkblue}{pkgdown}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/vignettes/illustration/}{\textcolor{linkblue}{Quarto}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.github.io/rwf/articles/}{\textcolor{linkblue}{R Markdown}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://github.com/sedzinfo/cv}{\textcolor{linkblue}{LaTeX}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://github.com/sedzinfo/golemcat}{\textcolor{linkblue}{Typst}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://github.com/sedzinfo}{\textcolor{linkblue}{Git}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://sedzinfo.grafana.net/public-dashboards/425b920caf1b48dfb15fc829d322e949}{\textcolor{linkblue}{Grafana}}}\discretionary{}{}{\hbox{\kern0.55em{\color{accent!40}\textbullet}\kern0.55em}}\mbox{\href{https://github.com/sedzinfo/geiger-counter}{\textcolor{linkblue}{Prometheus}}}}\tabularnewline
+\end{tabularx}\par\vspace{3pt}
+
+\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{Education}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{}\relax\else\hspace{8pt}{\small\color{muted}\itshape }\fi\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2009--2010 & \textbf{Bsc Psychology}\tabularnewline
+& {\small Hellenic NARIC Equivalence: National University of Athens}\tabularnewline
+\end{tabularx}\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2004--2005 & \textbf{MSc Research Methods in Psychology}\tabularnewline
+& {\small University of Hertfordshire}\tabularnewline
+\end{tabularx}\par\vspace{4pt}
+
+\noindent
+
+\begin{tabularx}{\linewidth}{@{}>{\small\raggedright\arraybackslash\hyphenpenalty=10000\leavevmode\color{muted}}p{2.55cm}X@{}}
+2001--2004 & \textbf{BSc Cognitive Science}\tabularnewline
+& {\small University of Hertfordshire}\tabularnewline
+\end{tabularx}\par\vspace{4pt}
+
+\end{document}

@@ -1,0 +1,167 @@
+---
+output:
+  pdf_document:
+    latex_engine: lualatex
+    pandoc_args: "--pdf-engine-opt=-shell-escape"
+    keep_tex: true
+    toc: false
+header-includes:
+- '\usepackage{fontawesome,ragged2e,array,enumitem,tabularx}'
+- '\usepackage[skins]{tcolorbox}'
+- '\usepackage[colorlinks=true,urlcolor=linkblue]{hyperref}'
+- '\setmainfont{Roboto}'
+- '\definecolor{accent}{RGB}{31,56,100}'
+- '\definecolor{muted}{RGB}{96,106,122}'
+- '\definecolor{rulegrey}{RGB}{205,212,222}'
+- '\definecolor{linkblue}{RGB}{26,95,180}'
+# left-aligned text (no broken words, even gaps) and one space after a full stop
+- '\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}'
+- '\AtBeginDocument{\frenchspacing}'
+- '\setlength{\parindent}{0pt}'
+# section title: small capitals in the accent colour, a hairline to the right
+# margin, and an optional grey note at the right end
+- '\newcommand{\cvsection}[2][]{\par\vspace{13pt}\noindent{\color{accent}\bfseries\addfontfeature{LetterSpace=10}\MakeUppercase{#2}}\hspace{8pt}{\color{rulegrey}\leaders\vrule height 3.6pt depth -3pt\hskip 0pt plus 1filll}\if\relax\detokenize{#1}\relax\else\hspace{8pt}{\small\color{muted}\itshape #1}\fi\par\vspace{4pt}}'
+geometry: "left=15mm,right=15mm,top=0mm,bottom=8mm"
+papersize: a4
+---
+
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+directory <- paste0(getwd(), "/")
+df_work        <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "work")
+df_education   <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "education")
+df_examples    <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "examples")
+# cv_v2 is cv_v1 with a new layout, so it shows the skills of cv_v1:
+# column cv empty (every CV) or "v1"
+df_examples    <- df_examples[is.na(df_examples$cv) | df_examples$cv == "v1", ]
+df_details     <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "details")
+df_description <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "description")
+df_projects    <- openxlsx::read.xlsx(paste0(directory, "cv.xlsx"), sheet = "projects")
+# the full contact details (the address, email, ...) instead of the short labels
+df_details$label <- ifelse(is.na(df_details$label_full), df_details$label, df_details$label_full)
+# jobs at the same company one after the other become one entry (Evalion part
+# time, then full time): from the first start to the last finish, each period in
+# the status, and the longest description
+merge_jobs <- function(df) {
+  group <- cumsum(c(TRUE, df$company[-1] != df$company[-nrow(df)]))
+  merged <- lapply(split(df, group), function(g) {
+    if (nrow(g) == 1) return(g)
+    g <- g[order(as.numeric(g$date_start)), ]
+    period <- ifelse(g$date_finish == "present", paste("since", g$date_start),
+                     paste0(g$date_start, "–", g$date_finish))
+    out <- g[which.max(nchar(g$responsibilities)), ]
+    out$date_start <- g$date_start[1]
+    out$date_finish <- if (any(g$date_finish == "present")) "present" else as.character(max(as.numeric(g$date_finish)))
+    out$status <- paste(g$status, period, collapse = ", ")
+    out
+  })
+  do.call(rbind, merged)
+}
+df_work <- merge_jobs(df_work)
+
+# One entry on the two-column grid every section shares: a grey left column
+# (dates, project type, skill group) and the content on the right.
+#   head:    first line; right: grey italic text at its right end
+#   lines:   what follows; bullets = TRUE puts each in its own bullet
+#   gap:     space after the entry
+tex_entry <- function(left, head, right = NA, lines = character(), bullets = TRUE, gap = "5pt") {
+  if (!is.na(right) && nzchar(right))
+    head <- paste0(head, "\\hspace{0pt plus 1filll}\\hspace{6pt}{\\small\\color{muted}\\itshape ", right, "}")
+  # the left cell starts its line before the colour: a colour switched on before
+  # the first line drops the cell below the row's baseline
+  out <- paste0("\\noindent\\begin{tabularx}{\\linewidth}{@{}>{\\small\\raggedright\\arraybackslash\\hyphenpenalty=10000\\leavevmode\\color{muted}}p{2.55cm}X@{}}\n",
+                left, " & ", head, "\\tabularnewline\n")
+  if (length(lines)) {
+    body <- if (bullets)
+      paste0("\\hangindent=1em\\hangafter=1\\makebox[1em][l]{\\textcolor{accent!55}{\\textbullet}}",
+             lines, "\\par", collapse = "\n")
+    else paste(lines, collapse = " ")
+    out <- paste0(out, "& {\\small ", body, "}\\tabularnewline\n")
+  }
+  paste0(out, "\\end{tabularx}\\par\\vspace{", gap, "}\n")
+}
+dot <- "\\enspace{\\color{muted}\\textperiodcentered}\\enspace "
+```
+
+\thispagestyle{empty}
+
+\begin{tcolorbox}[enhanced, frame hidden, sharp corners, colback=accent, coltext=white, grow to left by=15mm, grow to right by=15mm, left=15mm, right=15mm, top=7mm, bottom=5mm, boxsep=0pt, before skip=0pt, after skip=9pt]
+{\fontsize{23}{27}\selectfont\bfseries Dimitrios Zacharatos}\par
+\vspace{3pt}
+{\large\color{white!72!accent}Psychometrician \textperiodcentered\ Quantitative Researcher}\par
+\vspace{9pt}
+```{r details,results='asis',echo=FALSE}
+contacts <- character()
+for (i in 1:nrow(df_details)) {
+  icon <- sub("\\\\+$", "", df_details$icon[i])
+  link <- df_details$link[i]
+  label <- df_details$label[i]
+  if (grepl("^(https?://|mailto:|tel:)", link)) label <- paste0("\\href{", link, "}{", label, "}")
+  contacts <- c(contacts, paste0("\\makebox[1.2em][l]{\\color{white!62!accent}", icon, "}", label))
+}
+# three per row, white text and links on the band
+cat("{\\small\\hypersetup{urlcolor=white}\\begin{tabularx}{\\linewidth}{@{}XXX@{}}\n")
+rows <- split(contacts, ceiling(seq_along(contacts) / 3))
+for (r in rows) cat(paste0("  ", paste(c(r, rep("", 3 - length(r))), collapse = " & "), "\\\\[2pt]\n"))
+cat("\\end{tabularx}}\n")
+```
+\end{tcolorbox}
+
+```{r summary,results='asis',echo=FALSE}
+cat(df_description$description[1], "\n")
+```
+
+\setlength{\parskip}{0pt}
+
+\cvsection{Experience}
+```{r work_experience,results='asis',echo=FALSE}
+for (i in seq_len(nrow(df_work))) {
+  # the cell separates sentences with \\ : each one becomes a bullet
+  resp <- trimws(strsplit(df_work$responsibilities[i], "\\\\", fixed = TRUE)[[1]])
+  cat(tex_entry(paste0(df_work$date_start[i], "--", df_work$date_finish[i]),
+                paste0("\\textbf{", df_work$company[i], "}", dot, df_work$role[i]),
+                right = df_work$status[i], lines = resp[nzchar(resp)], gap = "7pt"))
+}
+```
+
+\cvsection{Projects}
+```{r projects,results='asis',echo=FALSE}
+for (i in seq_len(nrow(df_projects))) {
+  # "Shiny app: World Bank indicators explorer" -> type on the left, the rest on the right
+  d <- df_projects$description[i]
+  type <- ""
+  if (grepl(": ", d, fixed = TRUE)) {
+    type <- sub(":.*$", "", d)
+    d <- sub("^[^:]*:\\s*", "", d)
+  }
+  cat(tex_entry(type, paste0("\\href{", df_projects$link[i], "}{\\textbf{\\textcolor{linkblue}{", df_projects$name[i], "}}}", dot, "{\\small ", d, "}"),
+                gap = "2.5pt"))
+}
+```
+
+\cvsection[links open worked examples]{Skills}
+```{r skills,results='asis',echo=FALSE}
+# items stay whole; a line may only break between two items, and the dot
+# between them disappears at the break
+# (the colour sits in its own group: its reset must stay inside the box)
+sep <- "\\discretionary{}{}{\\hbox{\\kern0.55em{\\color{accent!40}\\textbullet}\\kern0.55em}}"
+for (cat_name in unique(df_examples$Experience)) {
+  rows <- df_examples[df_examples$Experience %in% cat_name, ]
+  items <- vapply(seq_len(nrow(rows)), function(j) {
+    name <- rows$full_name[j]
+    if (tolower(name) != tolower(rows$abbreviation[j])) name <- paste0(name, " (", rows$abbreviation[j], ")")
+    if (!is.na(rows$link[j]) && nzchar(rows$link[j])) name <- paste0("\\href{", rows$link[j], "}{\\textcolor{linkblue}{", name, "}}")
+    paste0("\\mbox{", name, "}")
+  }, "")
+  cat(tex_entry(cat_name, paste0("{\\small ", paste(items, collapse = sep), "}"), gap = "3pt"))
+}
+```
+
+\cvsection{Education}
+```{r education,results='asis',echo=FALSE}
+for (i in seq_len(nrow(df_education))) {
+  cat(tex_entry(paste0(df_education$date_start[i], "--", df_education$date_finish[i]),
+                paste0("\\textbf{", df_education$qualification[i], "}"),
+                lines = df_education$institution[i], bullets = FALSE, gap = "4pt"))
+}
+```

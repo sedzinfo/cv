@@ -3,4 +3,5 @@ Set-Location -Path $PSScriptRoot
 # Render the Rmd file
 Rscript -e "rmarkdown::render('cv_v0.Rmd')"
 Rscript -e "rmarkdown::render('cv_v1.Rmd')"
+Rscript -e "rmarkdown::render('cv_v2.Rmd')"
 Pause
