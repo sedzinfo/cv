@@ -1,0 +1,95 @@
+# Renders the CVs (cv_v0, cv_v1, cv_v2) with render_cv.sh and commits the PDFs
+# and their .tex back to main, so the PDFs in the repo always match cv.xlsx and
+# the templates.
+# On push it runs only when a file the PDFs are made from changes; from the
+# Actions tab, "Run workflow" renders them on demand.
+# The runner matches the local setup (Ubuntu 24.04 base, the same Roboto
+# package, pandoc 3.10, TinyTeX), so lines break where they break locally.
+name: Render CV PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cv.xlsx"
+      - "cv_v*.Rmd"
+      - "render_cv.sh"
+      - ".github/workflows/render-cv.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-cv
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # As in the vignettes repo: the runners fetch Ubuntu packages from Azure's
+      # mirror first, which at times stops answering, so apt uses the main Ubuntu
+      # archive over https and gives up on a stalled download after 30 s (3 tries)
+      - name: Use the main Ubuntu package archive
+        timeout-minutes: 5
+        run: |
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            printf 'https://archive.ubuntu.com/ubuntu/\tpriority:1\nhttps://security.ubuntu.com/ubuntu/\tpriority:2\n' | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
+          fi
+          for f in /etc/apt/sources.list.d/*.sources /etc/apt/sources.list; do
+            if [ -f "$f" ]; then
+              sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' "$f"
+            fi
+          done
+          printf 'Acquire::Retries "3";\nAcquire::http::Timeout "30";\nAcquire::https::Timeout "30";\n' | sudo tee /etc/apt/apt.conf.d/99-timeouts > /dev/null
+          sudo apt-get update -q || echo "::warning::apt-get update failed"
+
+      # The Roboto of the local machine (fonts-roboto-unhinted of Ubuntu 24.04)
+      - name: Install the Roboto font
+        timeout-minutes: 5
+        run: |
+          sudo apt-get install -y -q --no-install-recommends fonts-roboto-unhinted
+          fc-list | grep -q "Roboto" || { echo "::error::Roboto is not installed"; exit 1; }
+
+      - uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: "3.10"
+
+      - uses: r-lib/actions/setup-r@v2
+        timeout-minutes: 15
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::rmarkdown
+            any::knitr
+            any::openxlsx
+            any::tinytex
+
+      # TinyTeX as locally: rmarkdown installs the LaTeX packages the CVs use
+      # (fontawesome, tcolorbox, eso-pic, ...) the first time they are missing
+      - uses: r-lib/actions/setup-tinytex@v2
+
+      - name: Render the CVs
+        run: ./render_cv.sh
+
+      - name: Commit and push the PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv_v*.pdf cv_v*.tex
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Render CV PDFs [skip ci]"
+          git pull --rebase
+          git push
