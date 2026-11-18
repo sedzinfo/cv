@@ -61,9 +61,9 @@ See `LICENSE` for details.
 # Screenshots
 Made from the PDFs (150 dpi) by the workflow each time it renders them.
 
-| `cv_v1` | `cv_v0` |  `cv_v2` |
+| `cv_v0` | `cv_v1` | `cv_v2` |
 |---|---|---|
-| ![cv_v1](screenshot/cv_v1.png) | ![cv_v0](screenshot/cv_v0.png) | ![cv_v2](screenshot/cv_v2.png) |
+| ![cv_v0](screenshot/cv_v0.png) | ![cv_v1](screenshot/cv_v1.png) | ![cv_v2](screenshot/cv_v2.png) |
 
 ---
 
